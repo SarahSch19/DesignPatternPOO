@@ -61,6 +61,43 @@ namespace POO
             }
         }
 
+        public class Distance
+        {
+            public int Value;
+
+            public Distance(int value)
+            {
+                Value = value;
+            }
+        }
+        
+        public class Fuel
+        {
+            public int Value;
+            public Fuel(int fuel)
+            {
+                Value = fuel;
+            }
+        }
+
+        public class Consumption
+        {
+            public Fuel Estimate (string city1, string city2)
+            {
+                return new Fuel(65);
+            }
+
+            public Fuel Estimate(Distance distance)
+            {
+                return new Fuel(7);
+            }
+
+            public Distance Estimate(Fuel fuel)
+            {
+                return new Distance(100);
+            }
+        }
+
     #region Inheritance
     public class Inheritance
     {
@@ -223,48 +260,48 @@ namespace POO
     #endregion
 
     #region Polymorphism
-    //public class Polymophism
-    //{
-    //    [Fact]
-    //    public void Q01_Creer_une_classe_Fuel()
-    //    {
-    //        Fuel fuel = new Fuel(5);
+    public class Polymophism
+    {
+        [Fact]
+        public void Q01_Creer_une_classe_Fuel()
+        {
+            Fuel fuel = new Fuel(5);
 
-    //        Assert.Equal(5, fuel.Value);
-    //    }
+            Assert.Equal(5, fuel.Value);
+        }
 
-    //    [Fact]
-    //    public void Q02_Creer_une_classe_Consumption_possedant_une_methode_Estimate()
-    //    {
-    //        Consumption consumption = new Consumption();
+    [Fact]
+    public void Q02_Creer_une_classe_Consumption_possedant_une_methode_Estimate()
+    {
+        Consumption consumption = new Consumption();
 
-    //        Fuel fuel = consumption.Estimate("Paris", "Nice");
+        Fuel fuel = consumption.Estimate("Paris", "Nice");
 
-    //        Assert.Equal(65, fuel.Value);
-    //    }
+        Assert.Equal(65, fuel.Value);
+    }
 
-    //    [Fact]
-    //    public void Q03_Creer_une_deuxieme_methode_Estimate()
-    //    {
-    //        Consumption consumption = new Consumption();
+    [Fact]
+    public void Q03_Creer_une_deuxieme_methode_Estimate()
+    {
+        Consumption consumption = new Consumption();
 
-    //        Distance distance = new Distance(100);
-    //        Fuel fuel = consumption.Estimate(distance);
+        Distance distance = new Distance(100);
+        Fuel fuel = consumption.Estimate(distance);
 
-    //        Assert.Equal(7, fuel.Value);
-    //    }
+        Assert.Equal(7, fuel.Value);
+    }
 
-    //    [Fact]
-    //    public void Q04_Creer_une_troisieme_methode_Estimate()
-    //    {
-    //        Consumption consumption = new Consumption();
+    [Fact]
+    public void Q04_Creer_une_troisieme_methode_Estimate()
+    {
+        Consumption consumption = new Consumption();
 
-    //        Fuel fuel = new Fuel(7);
-    //        Distance distance = consumption.Estimate(fuel);
+        Fuel fuel = new Fuel(7);
+        Distance distance = consumption.Estimate(fuel);
 
-    //        Assert.Equal(100, distance.Value);
-    //    }
-    //}
+        Assert.Equal(100, distance.Value);
+    }
+    }
     #endregion
     
     #endregion
