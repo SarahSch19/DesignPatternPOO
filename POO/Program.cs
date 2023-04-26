@@ -7,10 +7,6 @@ namespace POO
     //Write your code here
 
     #region Enonce
-
-    #region Inheritance
-    public class Inheritance
-    {
         public class Vehicle
         {
             public string Description = "";
@@ -19,10 +15,40 @@ namespace POO
 
         public class Car : Vehicle
         {
-            public Car()
+            public Engine Engine;
+            public Wheel Wheel;
+
+            public Car(Engine engine, Wheel wheel)
             {
+                Engine = engine;
+                Wheel = wheel;
                 Type = "Car";
                 Description = "The Car has 45000 km.";
+            }
+
+            public Car()
+            {
+                Engine = new Engine();
+                Wheel = new Wheel();
+                Type = "Car";
+                Description = "The Car has 45000 km.";
+            }
+
+            public void StartEngine()
+            {
+                Engine.Start();
+            }
+
+            public void Accelerate()
+            {
+                if (Engine.IsStarted != false)
+                    Wheel.Turn();
+            }
+
+            public void Stop()
+            {
+                Engine.Stop();
+                Wheel.Stop();
             }
         }
 
@@ -34,6 +60,10 @@ namespace POO
                 Description = "The Motorbike has 7800 km.";
             }
         }
+
+    #region Inheritance
+    public class Inheritance
+    {
         
         [Fact]
         public void Q01_Creer_une_classe_Vehicle_avec_un_champs_Type()
@@ -81,13 +111,38 @@ namespace POO
     }
     #endregion
 
+    public class Wheel
+    {
+        public bool IsTurning = false;
+
+        public void Turn()
+        {
+            IsTurning = true;
+        }
+
+        public void Stop()
+        {
+            IsTurning = false;
+        }
+    }
+    public class Engine
+    {
+        public bool IsStarted = false;
+        public void Start()
+        {
+            IsStarted = true;
+            Console.WriteLine("Vroom Vroom");
+        }
+
+        public void Stop()
+        {
+            IsStarted = false;
+            Console.WriteLine("Goodbye");
+        }
+    }
     #region Composition
     public class Composition
     {
-        public class Engine
-        {
-            
-        }
         
         [Fact]
         public void Q01_Creer_une_classe_Engine_qui_peut_demarrer_et_s_arreter()
@@ -101,69 +156,69 @@ namespace POO
             Assert.False(engine.IsStarted);
         }
 
-    //    [Fact]
-    //    public void Q02_Creer_une_classe_Wheel_qui_peut_tourner_et_s_arreter()
-    //    {
-    //        Wheel wheel = new Wheel();
+    [Fact]
+    public void Q02_Creer_une_classe_Wheel_qui_peut_tourner_et_s_arreter()
+    {
+        Wheel wheel = new Wheel();
 
-    //        wheel.Turn();
-    //        Assert.True(wheel.IsTurning);
+        wheel.Turn();
+        Assert.True(wheel.IsTurning);
 
-    //        wheel.Stop();
-    //        Assert.False(wheel.IsTurning);
-    //    }
+        wheel.Stop();
+        Assert.False(wheel.IsTurning);
+    }
 
-    //    [Fact]
-    //    public void Q03_Ajouter_un_Engine_et_une_Wheel_a_la_classe_Car()
-    //    {
-    //        Engine engine = new Engine();
-    //        Wheel wheel = new Wheel();
-    //        Car car = new Car(engine, wheel);
+    [Fact]
+    public void Q03_Ajouter_un_Engine_et_une_Wheel_a_la_classe_Car()
+    {
+        Engine engine = new Engine();
+        Wheel wheel = new Wheel();
+        Car car = new Car(engine, wheel);
 
-    //        Assert.Equal(engine, car.Engine);
-    //        Assert.Equal(wheel, car.Wheel);
-    //    }
+        Assert.Equal(engine, car.Engine);
+        Assert.Equal(wheel, car.Wheel);
+    }
 
-    //    [Fact]
-    //    public void Q04_Ajouter_une_methode_pour_demarrer_le_moteur()
-    //    {
-    //        Engine engine = new Engine();
-    //        Wheel wheel = new Wheel();
-    //        Car car = new Car(engine, wheel);
+    [Fact]
+    public void Q04_Ajouter_une_methode_pour_demarrer_le_moteur()
+    {
+        Engine engine = new Engine();
+        Wheel wheel = new Wheel();
+        Car car = new Car(engine, wheel);
 
-    //        car.StartEngine();
-    //        Assert.True(engine.IsStarted);
-    //    }
+        car.StartEngine();
+        Assert.True(engine.IsStarted);
+    }
 
-    //    [Fact]
-    //    public void Q05_Ajouter_une_methode_pour_accelerer_si_le_moteur_est_demarre()
-    //    {
-    //        Engine engine = new Engine();
-    //        Wheel wheel = new Wheel();
-    //        Car car = new Car(engine, wheel);
+    [Fact]
+    public void Q05_Ajouter_une_methode_pour_accelerer_si_le_moteur_est_demarre()
+    {
+        Engine engine = new Engine();
+        Wheel wheel = new Wheel();
+        Car car = new Car(engine, wheel);
 
-    //        car.Accelerate();
-    //        Assert.False(wheel.IsTurning);
+        car.Accelerate();
+        Assert.False(wheel.IsTurning);
 
-    //        car.StartEngine();
-    //        car.Accelerate();
-    //        Assert.True(wheel.IsTurning);
-    //    }
+        car.StartEngine();
+        car.Accelerate();
+        Assert.True(wheel.IsTurning);
+    }
 
-    //    [Fact]
-    //    public void Q06_Ajouter_une_methode_pour_arreter_le_moteur_et_la_roue()
-    //    {
-    //        Engine engine = new Engine();
-    //        Wheel wheel = new Wheel();
-    //        Car car = new Car(engine, wheel);
+    [Fact]
+    public void Q06_Ajouter_une_methode_pour_arreter_le_moteur_et_la_roue()
+    {
+        Engine engine = new Engine();
+        Wheel wheel = new Wheel();
+        Car car = new Car(engine, wheel);
 
-    //        car.StartEngine();
-    //        car.Accelerate();
-    //        car.Stop();
+        car.StartEngine();
+        car.Accelerate();
+        car.Stop();
 
-    //        Assert.False(engine.IsStarted);
-    //        Assert.False(wheel.IsTurning);
-    //    }
+        Assert.False(engine.IsStarted);
+        Assert.False(wheel.IsTurning);
+    }
     }
     #endregion
 
